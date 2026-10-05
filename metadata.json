@@ -1,0 +1,10 @@
+{
+  "name": "Ezel 2",
+  "description": "Tayland\u0027a gelen Türk ve yabancı turistler için hızlı ve pratik rehber. Turlar, motor kiralama, döviz, eğlence mekanları ve transfer hizmetleri - Kadir Ezel.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
