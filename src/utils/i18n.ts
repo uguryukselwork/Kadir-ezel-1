@@ -859,6 +859,156 @@ export const TRANSLATIONS: Translations = {
     ar: 'يتم تطبيق ألوان المظهر المختارة فوراً على القوائم والأزرار.',
     zh: '所选主题色将立即应用于导航、按钮和卡片。',
     th: 'สีธีมที่เลือกจะถูกใช้กับเมนู ปุ่ม และการ์ดทันที'
+  },
+  welcomeSearch: {
+    tr: "Ülke ara",
+    en: "Search country",
+    ru: "Найти страну",
+    de: "Land suchen",
+    fr: "Rechercher un pays",
+    ar: "ابحث عن بلد",
+    zh: "搜索国家",
+    th: "ค้นหาประเทศ"
+  },
+  welcomeNoMatch: {
+    tr: "Bu isimde bir ülke bulunamadı. Listede yoksa “Diğer ülke”yi seçin.",
+    en: "No country matches that name. If yours isn’t listed, choose “Other country”.",
+    ru: "Страна не найдена. Если вашей нет в списке, выберите «Другая страна».",
+    de: "Kein Land gefunden. Wenn Ihres fehlt, wählen Sie „Anderes Land“.",
+    fr: "Aucun pays trouvé. S’il n’est pas listé, choisissez « Autre pays ».",
+    ar: "لم يتم العثور على بلد. إن لم يكن بلدك مدرجًا، اختر «بلد آخر».",
+    zh: "未找到该国家。如未列出，请选择“其他国家”。",
+    th: "ไม่พบประเทศนี้ หากไม่มีในรายการ ให้เลือก “ประเทศอื่น”"
+  },
+  welcomeSuggested: {
+    tr: "Ülkenize göre önerilen",
+    en: "Suggested for your country",
+    ru: "Рекомендуем для вашей страны",
+    de: "Empfohlen für Ihr Land",
+    fr: "Suggérée pour votre pays",
+    ar: "مقترحة لبلدك",
+    zh: "根据您的国家推荐",
+    th: "แนะนำสำหรับประเทศของคุณ"
+  },
+  welcomeStart: {
+    tr: "Uygulamayı aç",
+    en: "Open the app",
+    ru: "Открыть приложение",
+    de: "App öffnen",
+    fr: "Ouvrir l’application",
+    ar: "افتح التطبيق",
+    zh: "进入应用",
+    th: "เข้าสู่แอป"
+  },
+  changeCountryLanguage: {
+    tr: "Ülke ve dili değiştir",
+    en: "Change country and language",
+    ru: "Сменить страну и язык",
+    de: "Land und Sprache ändern",
+    fr: "Changer pays et langue",
+    ar: "تغيير البلد واللغة",
+    zh: "更改国家和语言",
+    th: "เปลี่ยนประเทศและภาษา"
+  },
+  navTours: {
+    tr: "Tur gezisi",
+    en: "Tours",
+    ru: "Экскурсии",
+    de: "Touren",
+    fr: "Excursions",
+    ar: "الجولات",
+    zh: "旅游团",
+    th: "ทัวร์"
+  },
+  navMotorbike: {
+    tr: "Motor kiralama",
+    en: "Bike rental",
+    ru: "Аренда байка",
+    de: "Rollerverleih",
+    fr: "Location scooter",
+    ar: "تأجير دراجة",
+    zh: "租摩托",
+    th: "เช่ามอเตอร์ไซค์"
+  },
+  navCurrency: {
+    tr: "Döviz hesaplayıcı",
+    en: "Currency",
+    ru: "Валюта",
+    de: "Währung",
+    fr: "Devises",
+    ar: "العملات",
+    zh: "汇率",
+    th: "แลกเงิน"
+  },
+  navTransfer: {
+    tr: "VIP transfer taksi",
+    en: "VIP transfer & taxi",
+    ru: "VIP-трансфер и такси",
+    de: "VIP-Transfer & Taxi",
+    fr: "Transfert VIP & taxi",
+    ar: "نقل VIP وتاكسي",
+    zh: "VIP接送与出租车",
+    th: "รถ VIP และแท็กซี่"
+  },
+  navStay: {
+    tr: "Konaklama",
+    en: "Stay",
+    ru: "Жильё",
+    de: "Unterkunft",
+    fr: "Hébergement",
+    ar: "الإقامة",
+    zh: "住宿",
+    th: "ที่พัก"
+  },
+  welcomeTitle: {
+    tr: "Hoş geldiniz",
+    en: "Welcome",
+    ru: "Добро пожаловать",
+    de: "Willkommen",
+    fr: "Bienvenue",
+    ar: "أهلاً بك",
+    zh: "欢迎",
+    th: "ยินดีต้อนรับ"
+  },
+  welcomePickSub: {
+    tr: "Ülkenizi ve dilinizi seçin, uygulama seçtiğiniz dilde açılsın.",
+    en: "Choose your country and language, and the app will open in that language.",
+    ru: "Выберите страну и язык — приложение откроется на этом языке.",
+    de: "Wählen Sie Land und Sprache, die App öffnet sich in dieser Sprache.",
+    fr: "Choisissez votre pays et votre langue, l’application s’ouvrira dans cette langue.",
+    ar: "اختر بلدك ولغتك، وسيفتح التطبيق بهذه اللغة.",
+    zh: "选择您的国家和语言，应用将以该语言打开。",
+    th: "เลือกประเทศและภาษา แล้วแอปจะเปิดเป็นภาษานั้น"
+  },
+  countryLabel: {
+    tr: "Ülke",
+    en: "Country",
+    ru: "Страна",
+    de: "Land",
+    fr: "Pays",
+    ar: "البلد",
+    zh: "国家",
+    th: "ประเทศ"
+  },
+  languageLabel: {
+    tr: "Dil",
+    en: "Language",
+    ru: "Язык",
+    de: "Sprache",
+    fr: "Langue",
+    ar: "اللغة",
+    zh: "语言",
+    th: "ภาษา"
+  },
+  ourServices: {
+    tr: "Hizmetlerimiz",
+    en: "Our services",
+    ru: "Наши услуги",
+    de: "Unsere Leistungen",
+    fr: "Nos services",
+    ar: "خدماتنا",
+    zh: "我们的服务",
+    th: "บริการของเรา"
   }
 };
 

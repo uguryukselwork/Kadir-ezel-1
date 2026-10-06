@@ -15,6 +15,7 @@ import { LanguageModal } from './components/LanguageModal';
 import { ThemeModal } from './components/ThemeModal';
 import { SettingsModal } from './components/SettingsModal';
 import { Toast } from './components/Toast';
+import { WelcomeScreen } from './components/WelcomeScreen';
 
 const MainContent: React.FC = () => {
   const { activeTab } = useApp();
@@ -36,6 +37,7 @@ const MainContent: React.FC = () => {
       <LanguageModal />
       <SettingsModal />
       <Toast />
+      <WelcomeScreen />
     </main>
   );
 };

@@ -18,6 +18,7 @@ import {
   MessageCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { countryFlag as countryFlagFor, countryName, OTHER_COUNTRY } from '../utils/countries';
 
 interface CountryOption {
   name: string;
@@ -68,13 +69,25 @@ const REQUEST_TYPE_OPTIONS: { id: RequestTypeOption; labelTr: string; labelEn: s
 ];
 
 export const SendRequestView: React.FC = () => {
-  const { language, addRequest, showToast, preselectedTourName, setPreselectedTourName, setActiveTab, playSound } = useApp();
+  const { language, addRequest, showToast, preselectedTourName, setPreselectedTourName, setActiveTab, playSound, country: visitorCountry } = useApp();
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [country, setCountry] = useState(language === 'tr' ? 'Türkiye' : 'Turkey');
-  const [countryFlag, setCountryFlag] = useState('🇹🇷');
-  const [customCountry, setCustomCountry] = useState('');
+  // Start from the country picked on the welcome screen
+  const initialCountry = (() => {
+    const flag = visitorCountry ? countryFlagFor(visitorCountry) : '🇹🇷';
+    const known = POPULAR_COUNTRIES.find((c) => c.flag === flag);
+    const other = POPULAR_COUNTRIES[POPULAR_COUNTRIES.length - 1];
+    if (known) return { name: language === 'tr' ? known.name : known.nameEn, flag: known.flag, custom: '' };
+    return {
+      name: language === 'tr' ? other.name : other.nameEn,
+      flag: other.flag,
+      custom: visitorCountry && visitorCountry !== OTHER_COUNTRY ? countryName(visitorCountry, language) : ''
+    };
+  })();
+  const [country, setCountry] = useState(initialCountry.name);
+  const [countryFlag, setCountryFlag] = useState(initialCountry.flag);
+  const [customCountry, setCustomCountry] = useState(initialCountry.custom);
 
   const [requestType, setRequestType] = useState<RequestTypeOption>('Tour');
   const [date, setDate] = useState('');

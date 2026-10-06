@@ -10,6 +10,10 @@ interface AppContextType {
   isLanguageModalOpen: boolean;
   openLanguageModal: () => void;
   closeLanguageModal: () => void;
+  country: string | null;
+  completeWelcome: (country: string, lang: Language) => void;
+  isWelcomeOpen: boolean;
+  openWelcome: () => void;
   theme: ThemeType;
   setTheme: (theme: ThemeType) => void;
   currentTheme: ThemeOption;
@@ -56,6 +60,7 @@ const STORAGE_REQUESTS_KEY = 'kadir_thai_requests';
 const STORAGE_DARK_KEY = 'kadir_thai_dark';
 const STORAGE_MOOD_KEY = 'kadir_thai_mood';
 const STORAGE_SOUND_KEY = 'kadir_thai_sound';
+const STORAGE_COUNTRY_KEY = 'kadir_thai_country';
 
 const INITIAL_SAMPLE_REQUESTS: UserRequest[] = [
   {
@@ -126,6 +131,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     // Open language picker modal for intuitive selection
     setIsLanguageModalOpen(true);
   };
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+  }, [language]);
+
+  // 1.2 Country of origin, asked once on first launch together with the language
+  const [country, setCountryState] = useState<string | null>(() => localStorage.getItem(STORAGE_COUNTRY_KEY));
+  const [isWelcomeOpen, setIsWelcomeOpen] = useState<boolean>(() => !localStorage.getItem(STORAGE_COUNTRY_KEY));
+
+  const completeWelcome = (code: string, lang: Language) => {
+    setCountryState(code);
+    localStorage.setItem(STORAGE_COUNTRY_KEY, code);
+    setLanguage(lang);
+    setIsWelcomeOpen(false);
+  };
+
+  const openWelcome = () => setIsWelcomeOpen(true);
 
   const openLanguageModal = () => setIsLanguageModalOpen(true);
   const closeLanguageModal = () => setIsLanguageModalOpen(false);
@@ -376,6 +399,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         isLanguageModalOpen,
         openLanguageModal,
         closeLanguageModal,
+        country,
+        completeWelcome,
+        isWelcomeOpen,
+        openWelcome,
         theme,
         setTheme,
         currentTheme,

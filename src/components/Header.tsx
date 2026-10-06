@@ -3,10 +3,11 @@ import { useApp } from '../context/AppContext';
 import { APP_CONFIG } from '../data';
 import { t } from '../utils/i18n';
 import { HamburgerMenu } from './HamburgerMenu';
+import { countryFlag } from '../utils/countries';
 import { Sun, Moon, MapPin, Menu } from 'lucide-react';
 
 export const Header: React.FC = () => {
-  const { language, darkMode, toggleDarkMode, setActiveTab, playSound } = useApp();
+  const { language, darkMode, toggleDarkMode, setActiveTab, playSound, country, openWelcome } = useApp();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -54,6 +55,16 @@ export const Header: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2">
+          {/* Country & language: reopens the first-launch picker */}
+          <button
+            onClick={() => { openWelcome(); playSound('click'); }}
+            className="icon-btn text-[20px] leading-none"
+            title={t('changeCountryLanguage', language)}
+            aria-label={t('changeCountryLanguage', language)}
+          >
+            <span aria-hidden="true">{country ? countryFlag(country) : '🌍'}</span>
+          </button>
+
           {/* Dark Mode Toggle */}
           <button
             onClick={() => { toggleDarkMode(); playSound('pop'); }}
