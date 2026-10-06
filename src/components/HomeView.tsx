@@ -298,7 +298,18 @@ export const HomeView: React.FC = () => {
         /* DEFAULT HOME VIEW */
         <>
           {/* Welcome Header */}
-          <div className="relative overflow-hidden rounded-[28px] p-6 text-white shadow-lg theme-gradient-bg">
+          <div className="relative overflow-hidden rounded-[28px] p-6 pt-28 text-white shadow-lg theme-gradient-bg">
+            {/* Andaman sea photo behind the welcome text */}
+            <img
+              src={TOURS_DATA[0]?.imageUrl}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80';
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/5 pointer-events-none" />
             <div className="relative z-10">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-xs font-extrabold uppercase tracking-wider mb-2.5">
                 <Flame className="w-3.5 h-3.5 text-orange-400" />
