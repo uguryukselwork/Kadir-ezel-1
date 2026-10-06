@@ -2,21 +2,27 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { TOURS_DATA, APP_CONFIG, TourItem } from '../data';
 import { t } from '../utils/i18n';
-import { MapPin, Clock, Check, CalendarCheck, Info } from 'lucide-react';
+import { MapPin, Clock, Check, CalendarCheck, Ship, Info } from 'lucide-react';
 
 export const ToursView: React.FC = () => {
   const { language, openOrganizerSheet, startBookingForTour, playSound } = useApp();
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-6 pb-12 animate-in fade-in duration-200">
       {/* Title & Introduction */}
-      <div className="px-1 pt-1">
-        <h2 className="font-display font-medium text-[28px] leading-tight text-[var(--text)]">
-          {t('popularToursTitle', language)}
-        </h2>
-        <p className="text-[14px] text-[var(--text-muted)] mt-1.5 max-w-[38ch]">
-          {t('popularToursSub', language)}
-        </p>
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-900/60 text-teal-800 dark:text-teal-300 text-xs font-black uppercase mb-1">
+            <Ship className="w-3.5 h-3.5" />
+            <span>{t('tabTours', language)}</span>
+          </div>
+          <h2 className="font-black text-2xl text-[var(--text)]">
+            {t('popularToursTitle', language)}
+          </h2>
+          <p className="text-xs font-semibold text-[var(--text-muted)] mt-1">
+            {t('popularToursSub', language)}
+          </p>
+        </div>
       </div>
 
       {/* Tour Cards */}
@@ -32,7 +38,7 @@ export const ToursView: React.FC = () => {
           return (
             <div
               key={tour.id}
-              className="group overflow-hidden rounded-[24px] bg-[var(--surface-card)] border border-[var(--border)] shadow-[var(--lift)]"
+              className="group overflow-hidden rounded-[28px] bg-[var(--surface-card)] border border-[var(--border)] shadow-sm hover:border-teal-500/40 transition-all space-y-0"
             >
               {/* Tour Image with Badges & MapPin Icon */}
               <div className="relative w-full h-52 sm:h-56 bg-slate-200 dark:bg-slate-800 overflow-hidden">
@@ -53,7 +59,7 @@ export const ToursView: React.FC = () => {
                 {/* Badge top-left */}
                 {badge && (
                   <div className="absolute top-3.5 left-3.5">
-                    <span className="text-[12px] font-semibold px-3 py-1 rounded-full bg-white/90 text-[var(--ink)] backdrop-blur-md">
+                    <span className="text-[11px] font-black px-3 py-1 rounded-full bg-orange-500 text-white shadow-md">
                       {badge}
                     </span>
                   </div>
@@ -72,15 +78,15 @@ export const ToursView: React.FC = () => {
                 {/* Bottom image overlay: Price & Duration */}
                 <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-end justify-between text-white">
                   <div>
-                    <div className="text-[12px] font-medium text-white/75">
+                    <div className="text-[11px] font-bold text-teal-200 uppercase tracking-wider">
                       {t('tourPrice', language)}
                     </div>
-                    <div className="font-display font-medium text-[28px] leading-none text-white mt-1">
+                    <div className="font-black text-2xl text-white drop-shadow-sm">
                       {tour.price}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md text-white text-[12.5px] font-medium border border-white/20">
+                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md text-white text-xs font-extrabold border border-white/20">
                     <Clock className="w-3.5 h-3.5 text-teal-300" />
                     <span>{duration}</span>
                   </div>
@@ -90,29 +96,29 @@ export const ToursView: React.FC = () => {
               {/* Card Body */}
               <div className="p-5 space-y-3.5">
                 {/* Tour Title */}
-                <h3 className="font-display font-medium text-[20px] text-[var(--text)] leading-snug">
+                <h3 className="font-black text-lg text-[var(--text)] leading-snug">
                   {tourTitle}
                 </h3>
 
                 {/* Description */}
-                <p className="text-[14px] text-[var(--text-muted)] leading-relaxed">
+                <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                   {desc}
                 </p>
 
                 {/* Highlights */}
-                <ul className="space-y-1.5">
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/60 space-y-1.5">
                   {highlights.map((h, i) => (
-                    <li key={i} className="flex items-start gap-2 text-[13.5px] text-[var(--text)]">
-                      <Check className="w-4 h-4 text-teal-600 dark:text-teal-300 shrink-0 mt-0.5" />
+                    <div key={i} className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                      <Check className="w-3.5 h-3.5 text-teal-600 shrink-0" />
                       <span>{h}</span>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
 
                 {/* Meeting Point Clickable Row */}
                 <div
                   onClick={() => { openOrganizerSheet(tour); playSound('pop'); }}
-                  className="cursor-pointer flex items-center gap-2 text-[13px] font-medium text-teal-700 dark:text-teal-300 hover:underline pt-1"
+                  className="cursor-pointer flex items-center gap-2 text-xs font-bold text-teal-700 dark:text-teal-400 hover:underline pt-1"
                 >
                   <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" />
                   <span className="truncate">{meetingPoint}</span>
@@ -123,7 +129,7 @@ export const ToursView: React.FC = () => {
                   {/* Meeting Details button */}
                   <button
                     onClick={() => { openOrganizerSheet(tour); playSound('pop'); }}
-                    className="h-12 rounded-full bg-[var(--bg)] hover:bg-slate-100 dark:hover:bg-slate-800 text-[var(--text)] font-semibold text-[14px] flex items-center justify-center gap-1.5 transition-colors border border-[var(--border)]"
+                    className="h-12 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-extrabold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95 border border-slate-200 dark:border-slate-700"
                   >
                     <Info className="w-4 h-4 text-teal-600" />
                     <span>{t('detailsButton', language)}</span>
@@ -132,7 +138,7 @@ export const ToursView: React.FC = () => {
                   {/* Prominent "Rezervasyon Yap" button */}
                   <button
                     onClick={() => { startBookingForTour(tour); playSound('tab'); }}
-                    className="h-12 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-[14px] flex items-center justify-center gap-1.5 shadow-[0_3px_0_var(--color-orange-800)] active:translate-y-0.5 active:shadow-none transition-all"
+                    className="h-12 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-[0_3px_0_#c2410c] active:translate-y-0.5 transition-all"
                   >
                     <CalendarCheck className="w-4 h-4 text-white" />
                     <span>{t('bookNow', language)}</span>

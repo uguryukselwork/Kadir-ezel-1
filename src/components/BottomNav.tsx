@@ -49,16 +49,16 @@ export const BottomNav: React.FC = () => {
       {/* Independent Floating Admin Panel Button placed right above the bottom bar on the right */}
       <button
         onClick={() => handleTabClick('admin')}
-        className={`fixed bottom-[88px] right-3.5 z-40 flex items-center gap-1.5 px-3 py-1.5 rounded-full backdrop-blur-md shadow-lg transition-all active:scale-95 ${
+        className={`fixed bottom-[74px] right-3.5 z-40 flex items-center gap-1.5 px-3 py-1.5 rounded-full backdrop-blur-md shadow-lg transition-all active:scale-95 ${
           isAdminActive
             ? 'theme-bg text-white border-2 border-white/60 shadow-teal-500/20'
-            : 'bg-[var(--surface-card)] text-[var(--text)] border border-[var(--border)]'
+            : 'bg-slate-900/85 dark:bg-slate-800/90 text-slate-200 hover:text-white border border-slate-700/70 hover:border-slate-500'
         }`}
         title={t('tabAdmin', language)}
         aria-label="Admin panel"
       >
         <ShieldCheck className={`w-4 h-4 ${isAdminActive ? 'text-white' : 'theme-text'}`} />
-        <span className="text-[11.5px] font-semibold">{t('tabAdmin', language)}</span>
+        <span className="text-[11px] font-black tracking-tight">{t('tabAdmin', language)}</span>
         {newRequestsCount > 0 && (
           <span className="px-1.5 min-w-[16px] h-4 rounded-full bg-rose-500 text-white text-[10px] font-black flex items-center justify-center shadow-xs">
             {newRequestsCount}
@@ -71,11 +71,22 @@ export const BottomNav: React.FC = () => {
         <div className="bottom-nav-inner">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
+            const isRequestTab = tab.id === 'request';
+            const isCurrencyTab = tab.id === 'currency';
+
             return (
               <button
                 key={tab.id}
                 onClick={() => handleTabClick(tab.id)}
-                className={`nav-item ${isActive ? 'active' : ''}`}
+                className={`nav-item transition-all ${
+                  isActive
+                    ? 'active'
+                    : isRequestTab
+                    ? 'text-orange-500'
+                    : isCurrencyTab
+                    ? 'text-emerald-500'
+                    : ''
+                }`}
                 aria-current={isActive ? 'page' : undefined}
               >
                 <div className="relative">
@@ -86,7 +97,7 @@ export const BottomNav: React.FC = () => {
                     </span>
                   )}
                 </div>
-                <span className="whitespace-nowrap truncate max-w-full">
+                <span className="text-[10px] font-bold mt-0.5 tracking-tight whitespace-nowrap">
                   {t(tab.labelKey, language)}
                 </span>
               </button>
