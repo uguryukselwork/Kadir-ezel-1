@@ -146,14 +146,14 @@ export const HomeView: React.FC = () => {
     : [];
 
   return (
-    <div className="space-y-6 pb-12 animate-in fade-in duration-200">
+    <div className="space-y-7 pb-12">
       {/* Top Controls: Left-side Theme Button + Search Bar */}
       <div className="flex items-center gap-2.5">
         {/* Small Theme Button on the Left */}
         <button
           type="button"
           onClick={() => { openThemeModal(); playSound('click'); }}
-          className="animate-signal w-13 h-13 rounded-full bg-[var(--surface-card)] border border-[var(--border)] shadow-sm flex items-center justify-center text-[var(--text)] hover:scale-105 active:scale-95 transition-all shrink-0 relative group"
+          className="animate-signal w-12 h-12 rounded-full bg-[var(--surface-card)] border border-[var(--border)] shadow-sm flex items-center justify-center text-[var(--text)] hover:scale-105 active:scale-95 transition-all shrink-0 relative group"
           title={language === 'tr' ? 'Renk Teması Değiştir' : 'Change Color Theme'}
           aria-label="Theme selector"
         >
@@ -166,14 +166,14 @@ export const HomeView: React.FC = () => {
 
         {/* Search & Filter Bar */}
         <div className="relative flex-1">
-          <div className="flex items-center gap-2.5 px-4 h-13 rounded-full bg-[var(--surface-card)] border border-[var(--border)] shadow-sm focus-within:border-[var(--primary)] focus-within:ring-2 focus-within:ring-[var(--primary)]/20 transition-all">
+          <div className="flex items-center gap-2.5 px-4 h-12 rounded-full bg-[var(--surface-card)] border border-[var(--border)] focus-within:border-[var(--primary)] focus-within:ring-2 focus-within:ring-[var(--primary)]/20 transition-all">
             <Search className="w-5 h-5 text-slate-400 shrink-0" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t('searchPlaceholder', language)}
-              className="w-full bg-transparent text-sm font-semibold text-[var(--text)] outline-none placeholder:text-slate-400"
+              className="w-full bg-transparent text-[15px] text-[var(--text)] outline-none placeholder:text-[var(--faint)]"
             />
             {searchQuery && (
               <button
@@ -191,12 +191,12 @@ export const HomeView: React.FC = () => {
       {searchQuery.trim() ? (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="font-extrabold text-lg text-[var(--text)]">
+            <h2 className="font-display font-medium text-[19px] text-[var(--text)]">
               {language === 'tr' ? 'Arama Sonuçları' : 'Search Results'} ({filteredItems.length})
             </h2>
             <button
               onClick={() => { setSearchQuery(''); playSound('pop'); }}
-              className="text-xs font-bold text-teal-600"
+              className="text-[13px] font-semibold text-teal-700 dark:text-teal-300"
             >
               {language === 'tr' ? 'Temizle' : 'Clear'}
             </button>
@@ -225,19 +225,19 @@ export const HomeView: React.FC = () => {
           <div className="flex items-center justify-between">
           <button
             onClick={() => { setSelectedCategoryId(null); playSound('pop'); }}
-            className="inline-flex items-center gap-1.5 text-xs font-black text-teal-600 dark:text-teal-400 hover:underline py-1"
+            className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-teal-700 dark:text-teal-300 hover:underline py-1"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>{language === 'tr' ? 'Tüm Kategoriler' : 'All Categories'}</span>
           </button>
-            <span className="text-xs font-extrabold text-slate-400">
+            <span className="text-[13px] text-[var(--text-muted)]">
               {categoryItems.length} {language === 'tr' ? 'Öneri' : 'Items'}
             </span>
           </div>
 
           {/* Category Header Card */}
           <div
-            className="p-5 rounded-[26px] border border-slate-200/80 dark:border-slate-700/80 shadow-sm"
+            className="p-5 rounded-[22px]"
             style={{ backgroundColor: currentCategory.bgColor }}
           >
             <div className="flex items-center gap-3 mb-2">
@@ -249,12 +249,12 @@ export const HomeView: React.FC = () => {
               </div>
               <div>
                 <h2
-                  className="font-black text-xl leading-tight"
+                  className="font-display font-medium text-[22px] leading-tight"
                   style={{ color: currentCategory.textColor }}
                 >
                   {language === 'tr' ? currentCategory.nameTr : currentCategory.nameEn}
                 </h2>
-                <div className="text-xs font-bold opacity-80 mt-0.5 text-slate-800 dark:text-slate-200">
+                <div className="text-[13.5px] mt-1 text-[var(--text)]/80">
                   {language === 'tr' ? currentCategory.descTr : currentCategory.descEn}
                 </div>
               </div>
@@ -286,7 +286,7 @@ export const HomeView: React.FC = () => {
             <div className="pt-2">
               <button
                 onClick={() => { setActiveTab('currency'); playSound('tab'); }}
-                className="w-full h-12 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs flex items-center justify-center gap-2 shadow-sm transition-all"
+                className="btn btn-primary w-full"
               >
                 <DollarSign className="w-4 h-4" />
                 <span>{language === 'tr' ? 'Canlı Baht ➔ TL Kur Hesaplayıcıyı Aç' : 'Open Live Baht ➔ TRY Calculator'}</span>
@@ -297,85 +297,134 @@ export const HomeView: React.FC = () => {
       ) : (
         /* DEFAULT HOME VIEW */
         <>
-          {/* Welcome Header */}
-          <div className="relative overflow-hidden rounded-[28px] p-6 text-white shadow-lg theme-gradient-bg">
-            <div className="relative z-10">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-white text-xs font-extrabold uppercase tracking-wider mb-2.5">
-                <Flame className="w-3.5 h-3.5 text-orange-400" />
-                <span>{language === 'tr' ? 'Tayland Seyahat Asistanı' : 'Thailand Travel Assistant'}</span>
-              </div>
-              <h2 className="font-black text-2xl sm:text-3xl leading-tight tracking-tight text-white mb-2">
-                {t('welcomeHeader', language)}
-              </h2>
-              <p className="text-sm font-semibold text-white/90 leading-relaxed max-w-sm">
-                {t('welcomeSub', language)}
-              </p>
-
-              <div className="flex items-center gap-2 mt-4 pt-1">
-                <button
-                  onClick={() => { setActiveTab('request'); playSound('tab'); }}
-                  className="px-4 py-2.5 rounded-full bg-orange-500 hover:bg-orange-600 text-white text-xs font-black shadow-[0_3px_0_#c2410c] active:translate-y-0.5 transition-all"
-                >
-                  {t('tabRequest', language)}
-                </button>
-                <button
-                  onClick={() => { setActiveTab('tours'); playSound('tab'); }}
-                  className="px-4 py-2.5 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md text-white text-xs font-black transition-all"
-                >
-                  {t('tabTours', language)}
-                </button>
+          {/* Welcome hero: photo of the Andaman with "sawasdee" in Thai script */}
+          <section className="hero-andaman">
+            <img
+              src={TOURS_DATA[0]?.imageUrl}
+              alt=""
+              className="hero-andaman-photo"
+              loading="eager"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80';
+              }}
+            />
+            <div className="hero-andaman-shade" />
+            <div className="relative z-10 flex-1 flex flex-col">
+              <div className="mt-auto">
+                <p className="hero-thai" lang="th" aria-hidden="true">สวัสดี</p>
+                <p className="text-[12.5px] font-medium text-white/70 mt-1 mb-4">
+                  {language === 'tr' ? 'Tayca "merhaba" demek' : '"Hello" in Thai'}
+                </p>
+                <h2 className="font-display text-[26px] leading-[1.15] font-medium text-white">
+                  {t('welcomeHeader', language).replace(/\s*🇹🇭/u, '')}
+                </h2>
+                <p className="text-[14px] leading-relaxed text-white/85 mt-2 max-w-[34ch]">
+                  {t('welcomeSub', language)}
+                </p>
+                <div className="flex items-center gap-2 mt-5">
+                  <button
+                    onClick={() => { setActiveTab('request'); playSound('tab'); }}
+                    className="h-11 px-5 rounded-full bg-orange-500 hover:bg-orange-600 text-white text-[14px] font-semibold shadow-[0_3px_0_var(--color-orange-800)] active:translate-y-0.5 active:shadow-none transition-all"
+                  >
+                    {t('tabRequest', language)}
+                  </button>
+                  <button
+                    onClick={() => { setActiveTab('tours'); playSound('tab'); }}
+                    className="h-11 px-5 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md text-white text-[14px] font-semibold ring-1 ring-white/30 transition-colors"
+                  >
+                    {t('tabTours', language)}
+                  </button>
+                </div>
               </div>
             </div>
+          </section>
 
-            {/* Subtle background decoration */}
-            <div className="absolute -right-6 -bottom-8 w-44 h-44 rounded-full bg-white/10 blur-2xl pointer-events-none" />
-            <div className="absolute right-4 bottom-3 opacity-20 pointer-events-none">
-              <Compass className="w-28 h-28 text-white" />
+          {/* Your guide: Kadir Ezel */}
+          <button
+            type="button"
+            onClick={() => openOrganizerSheet(null)}
+            className="w-full text-left flex items-center gap-3.5 p-3.5 pr-4 rounded-[22px] bg-[var(--surface-card)] border border-[var(--border)] shadow-[var(--lift)] hover:border-teal-300 transition-colors"
+          >
+            <div className="relative shrink-0">
+              <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-teal-500 ring-offset-2 ring-offset-[var(--surface-card)] bg-teal-50">
+                <img
+                  src={APP_CONFIG.profilePicture || '/kadir_ezel_profile.jpg'}
+                  alt={APP_CONFIG.organizerName}
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.src.endsWith('/kadir_ezel_profile.jpg')) {
+                      target.src = '/kadir_ezel_profile.jpg';
+                    } else if (!target.src.endsWith('/apple-touch-icon.png')) {
+                      target.src = '/apple-touch-icon.png';
+                    }
+                  }}
+                />
+              </div>
+              <div className="absolute -bottom-0.5 -right-0.5 z-10 rounded-full bg-[var(--surface-card)] p-[1.5px]">
+                <InstagramVerifiedBadge size={16} />
+              </div>
             </div>
-          </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-[12.5px] text-[var(--text-muted)]">{t('tourOrganizer', language)}</div>
+              <div className="font-display font-medium text-[18px] leading-tight text-[var(--text)] truncate">
+                {APP_CONFIG.organizerName}
+              </div>
+              <div className="text-[12.5px] text-[var(--text-muted)] mt-0.5 flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" />
+                <span className="truncate">{language === 'tr' ? APP_CONFIG.meetingPointName : APP_CONFIG.meetingPointNameEn}</span>
+              </div>
+            </div>
+            <span className="shrink-0 h-9 px-3.5 rounded-full theme-bg text-white text-[13px] font-semibold flex items-center">
+              {language === 'tr' ? 'İletişim' : 'Contact'}
+            </span>
+          </button>
 
-          {/* Relationship Mood Feature */}
-          <div className="bg-[var(--surface-card)] border border-[var(--border)] rounded-[26px] p-4 shadow-sm space-y-4">
-            <div className="flex items-center justify-between px-1">
-              <h3 className="font-extrabold text-[11px] text-[var(--text-muted)] uppercase tracking-widest">
+          {/* Holiday mood picker */}
+          <section className="space-y-3">
+            <div className="flex items-baseline justify-between px-1">
+              <h3 className="font-display font-medium text-[19px] text-[var(--text)]">
                 {t('relationshipMoodTitle', language)}
               </h3>
               {selectedMoodId && (
-                <button 
+                <button
                   onClick={() => { setSelectedMoodId(null); playSound('pop'); }}
-                  className="text-[10px] font-black text-teal-600 dark:text-teal-400 uppercase"
+                  className="text-[13px] font-semibold text-teal-700 dark:text-teal-300"
                 >
                   {language === 'tr' ? 'Temizle' : 'Clear'}
                 </button>
               )}
             </div>
 
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            <div className="flex items-start gap-3 overflow-x-auto pb-1 -mx-[18px] px-[18px] scrollbar-none snap-x">
               {MOOD_OPTIONS.map((mood) => {
                 const isSelected = selectedMoodId === mood.id;
                 return (
                   <button
                     key={mood.id}
                     onClick={() => { setSelectedMoodId(mood.id); playSound('pop'); }}
-                    className={`flex flex-col items-center gap-2 min-w-[82px] p-2 rounded-2xl transition-all active:scale-95 group ${
-                      isSelected 
-                        ? 'bg-teal-50 dark:bg-teal-950/40 border-2 border-teal-500 shadow-md ring-2 ring-teal-500/20 scale-[1.02]' 
-                        : 'bg-slate-50 dark:bg-slate-800/40 border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-700'
-                    }`}
+                    aria-pressed={isSelected}
+                    className="flex flex-col items-center gap-1.5 w-[72px] shrink-0 snap-start group"
                   >
-                    <div className={`w-14 h-14 rounded-2xl overflow-hidden relative shadow-sm transition-transform duration-200 ${isSelected ? 'ring-2 ring-teal-500' : 'group-hover:scale-105'}`}>
+                    <div
+                      className={`w-[72px] h-[88px] rounded-[18px] overflow-hidden relative transition-all ${
+                        isSelected
+                          ? 'ring-[3px] ring-teal-500 ring-offset-2 ring-offset-[var(--bg)]'
+                          : 'ring-1 ring-[var(--border)] group-hover:ring-teal-300'
+                      }`}
+                    >
                       <img
                         src={mood.image}
-                        alt={t(mood.nameKey, language)}
+                        alt=""
                         className="w-full h-full object-cover"
                         loading="lazy"
                         onError={(e) => {
                           (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80';
                         }}
                       />
-                      <div className="absolute inset-0 bg-black/10" />
                     </div>
-                    <span className={`text-[10px] font-black uppercase tracking-tight text-center leading-tight line-clamp-1 ${isSelected ? 'text-teal-700 dark:text-teal-300' : 'text-slate-600 dark:text-slate-400'}`}>
+                    <span className={`text-[12px] leading-tight text-center line-clamp-1 ${isSelected ? 'font-semibold text-[var(--text)]' : 'text-[var(--text-muted)]'}`}>
                       {t(mood.nameKey, language)}
                     </span>
                   </button>
@@ -385,234 +434,124 @@ export const HomeView: React.FC = () => {
 
             {selectedMoodId && (() => {
               const activeMood = MOOD_OPTIONS.find((m) => m.id === selectedMoodId);
+              if (!activeMood) return null;
               return (
-                <div className="p-4 rounded-2xl bg-orange-50 dark:bg-orange-950/30 border border-orange-200/50 dark:border-orange-900/30 animate-in zoom-in-95 duration-200 space-y-3.5">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                      <Star className="w-4 h-4 text-white fill-white" />
-                    </div>
-                    <p className="text-sm font-bold text-orange-900 dark:text-orange-100 leading-snug italic">
-                      "{t(activeMood?.quoteKey || '', language)}"
+                <div className="rounded-[22px] bg-[var(--surface-card)] border border-[var(--border)] shadow-[var(--lift)] overflow-hidden">
+                  <div className="p-4 space-y-3">
+                    <p className="font-display text-[17px] leading-snug text-[var(--text)]">
+                      {t(activeMood.quoteKey, language)}
                     </p>
+                    <div className="flex items-start gap-2 text-[14px] text-[var(--text-muted)]">
+                      <Sparkles className="w-4 h-4 text-orange-500 shrink-0 mt-0.5" />
+                      <span>{t(activeMood.taskKey, language)}</span>
+                    </div>
                   </div>
-
-                  <div className="pt-2 border-t border-orange-200/50 dark:border-orange-900/50 flex flex-col gap-1">
-                    <span className="text-[10px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-wider">
-                      {t('suggestedAction', language)}
+                  <button
+                    onClick={() => handleOpenMoodPlace(activeMood.placeId)}
+                    className="w-full flex items-center gap-3 px-4 py-3 bg-orange-50 dark:bg-orange-950/50 border-t border-[var(--border)] text-left hover:bg-orange-100 dark:hover:bg-orange-950 transition-colors"
+                  >
+                    <img
+                      src={activeMood.image}
+                      alt=""
+                      className="w-11 h-11 rounded-xl object-cover shrink-0"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80';
+                      }}
+                    />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[12px] text-orange-700 dark:text-orange-300">
+                        {language === 'tr' ? 'Kadir’in önerisi' : 'Kadir recommends'}
+                      </span>
+                      <span className="block font-semibold text-[14.5px] text-[var(--text)] truncate">
+                        {language === 'tr' ? activeMood.placeNameTr : activeMood.placeNameEn}
+                      </span>
                     </span>
-                    <div className="flex items-center gap-2 text-sm font-extrabold text-orange-950 dark:text-orange-100">
-                      <Sparkles className="w-4 h-4 text-orange-500" />
-                      <span>{t(activeMood?.taskKey || '', language)}</span>
-                    </div>
-                  </div>
-
-                  {/* Önerilen Mekan ve Bilgilerini Görme Butonu */}
-                  {activeMood && (
-                    <div className="pt-3 border-t border-orange-200/60 dark:border-orange-900/60">
-                      <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-orange-200/80 dark:border-orange-900/60 shadow-xs flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 shadow-xs border border-orange-200 dark:border-orange-950">
-                            <img
-                              src={activeMood.image}
-                              alt={activeMood.placeNameTr}
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80';
-                              }}
-                            />
-                          </div>
-                          <div className="min-w-0">
-                            <span className="text-[10px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-wider block truncate">
-                              {language === 'tr' ? 'Önerilen Mekan / Tur' : 'Recommended Destination'}
-                            </span>
-                            <h4 className="font-black text-xs sm:text-sm text-slate-900 dark:text-white truncate">
-                              {language === 'tr' ? activeMood.placeNameTr : activeMood.placeNameEn}
-                            </h4>
-                          </div>
-                        </div>
-
-                        <button
-                          onClick={() => handleOpenMoodPlace(activeMood.placeId)}
-                          className="h-10 px-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-black text-xs shrink-0 shadow-sm active:scale-95 transition-all flex items-center gap-1.5"
-                        >
-                          <Info className="w-4 h-4" />
-                          <span>{language === 'tr' ? 'Bilgileri Gör' : 'View Details'}</span>
-                        </button>
-                      </div>
-                    </div>
-                  )}
+                    <ChevronRight className="w-5 h-5 text-orange-600 dark:text-orange-300 shrink-0" />
+                  </button>
                 </div>
               );
             })()}
-          </div>
+          </section>
 
-          {/* Tour Organizer Card: Kadir Ezel (opens the same bottom sheet) */}
-          <div className="group border theme-border/30 bg-[var(--surface-card)] p-4 rounded-[26px] shadow-sm hover:border-[var(--primary)] transition-all">
-            <div className="flex items-center justify-between gap-3">
-              <div 
-                className="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0"
-                onClick={() => openOrganizerSheet(null)}
-              >
-                <div className="relative shrink-0">
-                  <div className="w-13 h-13 rounded-2xl overflow-hidden shadow-md border-2 border-teal-500/40 bg-teal-50 dark:bg-teal-950">
-                    <img 
-                      src={APP_CONFIG.profilePicture || '/kadir_ezel_profile.jpg'} 
-                      alt={APP_CONFIG.organizerName}
-                      className="w-full h-full object-cover"
-                      loading="eager"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        if (!target.src.endsWith('/kadir_ezel_profile.jpg')) {
-                          target.src = '/kadir_ezel_profile.jpg';
-                        } else if (!target.src.endsWith('/apple-touch-icon.png')) {
-                          target.src = '/apple-touch-icon.png';
-                        }
-                      }}
-                    />
-                  </div>
-                  {/* Instagram Verified Rosette Badge */}
-                  <div className="absolute -bottom-1 -right-1 z-10 rounded-full bg-white dark:bg-slate-900 p-[1.5px] shadow-sm flex items-center justify-center">
-                    <InstagramVerifiedBadge size={17} />
-                  </div>
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-black text-base text-slate-900 dark:text-slate-100 truncate">
-                      {t('tourOrganizer', language)}
-                      <span className="theme-text ml-1">{APP_CONFIG.organizerName}</span>
-                    </span>
-                    <InstagramVerifiedBadge size={16} />
-                  </div>
-                  <div className="text-xs font-bold text-slate-600 dark:text-slate-300 mt-0.5 flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" />
-                    <span className="truncate">{language === 'tr' ? APP_CONFIG.meetingPointName : APP_CONFIG.meetingPointNameEn}</span>
-                  </div>
-                </div>
-              </div>
+          {/* Categories as one list, so names and descriptions get the full width */}
+          <section className="space-y-3">
+            <h3 className="font-display font-medium text-[19px] text-[var(--text)] px-1">
+              {t('categoriesTitle', language)}
+            </h3>
 
-              {/* Action Buttons */}
-              <div className="flex items-center gap-1.5 shrink-0">
+            <div className="rounded-[22px] bg-[var(--surface-card)] border border-[var(--border)] shadow-[var(--lift)] overflow-hidden divide-y divide-[var(--border)]">
+              {CATEGORIES.map((cat) => (
                 <button
-                  onClick={() => openOrganizerSheet(null)}
-                  className="px-3.5 py-2 rounded-full theme-bg text-white text-xs font-black hover:opacity-90 active:scale-95 transition-all shadow-sm"
-                  title={language === 'tr' ? 'İletişim & Konum' : 'Contact & Point'}
+                  key={cat.id}
+                  type="button"
+                  onClick={() => {
+                    if (cat.id === 'tours') {
+                      setActiveTab('tours');
+                      playSound('tab');
+                    } else {
+                      setSelectedCategoryId(cat.id);
+                      playSound('click');
+                    }
+                  }}
+                  className="w-full text-left flex items-center gap-3.5 px-4 py-3.5 hover:bg-[var(--bg)] transition-colors"
                 >
-                  {language === 'tr' ? 'İletişim & Konum' : 'Contact & Point'}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Share App on WhatsApp Banner (Tastefully relocated from the top header) */}
-          <div className="p-4 rounded-[26px] bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-sm flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shrink-0 shadow-inner">
-                <Share2 className="w-5 h-5 text-white" />
-              </div>
-              <div className="min-w-0">
-                <h4 className="font-black text-sm text-white truncate">
-                  {language === 'tr' ? 'Kadir Thai Rehberini Paylaş' : 'Share Kadir Thai Guide'}
-                </h4>
-                <p className="text-[11px] text-teal-100 font-semibold truncate">
-                  {language === 'tr' ? 'Tayland tatiline çıkan arkadaşlarına gönder' : 'Send to friends traveling to Thailand'}
-                </p>
-              </div>
-            </div>
-
-            <button
-              onClick={handleShareApp}
-              className="h-10 px-4 rounded-full bg-white text-emerald-800 font-black text-xs shrink-0 shadow-sm active:scale-95 transition-all flex items-center gap-1.5"
-            >
-              <MessageCircle className="w-4 h-4 fill-[#25D366] text-[#25D366]" />
-              <span>{language === 'tr' ? 'Paylaş' : 'Share'}</span>
-            </button>
-          </div>
-
-          {/* Category Cards (7 Items) */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between px-1">
-              <h3 className="font-extrabold text-lg text-[var(--text)]">
-                {t('categoriesTitle', language)}
-              </h3>
-              <span className="text-xs font-bold text-slate-400">
-                {CATEGORIES.length} {language === 'tr' ? 'Kategori' : 'Categories'}
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {CATEGORIES.map((cat) => {
-                const count = PLACE_ITEMS.filter((p) => p.categoryId === cat.id).length;
-                return (
                   <div
-                    key={cat.id}
-                    onClick={() => {
-                      if (cat.id === 'tours') {
-                        setActiveTab('tours');
-                        playSound('tab');
-                      } else {
-                        setSelectedCategoryId(cat.id);
-                        playSound('click');
-                      }
-                    }}
-                    className="p-4 rounded-[24px] bg-[var(--surface-card)] border border-[var(--border)] hover:border-teal-500/40 shadow-sm cursor-pointer transition-all active:scale-[0.98] flex items-center justify-between gap-3"
+                    className="w-11 h-11 rounded-[14px] flex items-center justify-center shrink-0 [&>svg]:w-5 [&>svg]:h-5"
+                    style={{ backgroundColor: cat.bgColor, color: cat.textColor }}
                   >
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <div
-                        className="w-13 h-13 rounded-2xl flex items-center justify-center shrink-0 shadow-sm"
-                        style={{ backgroundColor: cat.bgColor, color: cat.textColor }}
-                      >
-                        {getCategoryIcon(cat.iconName)}
-                      </div>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2">
-                          <h4 className="font-black text-sm text-[var(--text)] truncate">
-                            {language === 'tr' ? cat.nameTr : cat.nameEn}
-                          </h4>
-                          {cat.badgeTr && (
-                            <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 shrink-0">
-                              {language === 'tr' ? cat.badgeTr : cat.badgeEn}
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-xs text-[var(--text-muted)] line-clamp-1 mt-0.5">
-                          {language === 'tr' ? cat.descTr : cat.descEn}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 shrink-0">
-                      <ChevronRight className="w-4 h-4" />
-                    </div>
+                    {getCategoryIcon(cat.iconName)}
                   </div>
-                );
-              })}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-[15px] text-[var(--text)] truncate">
+                        {language === 'tr' ? cat.nameTr : cat.nameEn}
+                      </span>
+                      {cat.badgeTr && (
+                        <span className="text-[11px] font-medium px-2 py-px rounded-full bg-[var(--bg)] text-[var(--text-muted)] shrink-0">
+                          {language === 'tr' ? cat.badgeTr : cat.badgeEn}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[13px] leading-snug text-[var(--text-muted)] line-clamp-2 mt-0.5">
+                      {language === 'tr' ? cat.descTr : cat.descEn}
+                    </p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-[var(--faint)] shrink-0" />
+                </button>
+              ))}
             </div>
-          </div>
+          </section>
 
-          {/* Quick Support Banner */}
-          <div className="p-4 rounded-[24px] bg-amber-50 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-800/40 flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0">
-                <Star className="w-5 h-5 fill-white" />
-              </div>
-              <div>
-                <h4 className="font-extrabold text-sm text-amber-950 dark:text-amber-100">
-                  {language === 'tr' ? 'Özel Tur veya Transfer mi Lazım?' : 'Need Custom Tour or Transfer?'}
-                </h4>
-                <p className="text-xs text-amber-800/90 dark:text-amber-300 mt-0.5">
-                  {language === 'tr'
-                    ? 'Size özel program ve fiyat teklifi hazırlayalım.'
-                    : 'Get a personalized schedule and instant WhatsApp quote.'}
-                </p>
-              </div>
+          {/* Custom tour: dark closing block */}
+          <section className="rounded-[22px] bg-[var(--ink)] text-white p-5 relative overflow-hidden">
+            <svg className="absolute right-0 bottom-0 !w-40 !h-16 text-white/[0.07]" viewBox="0 0 160 64" aria-hidden="true">
+              <path d="M0 40 Q20 30 40 40 T80 40 T120 40 T160 40 V64 H0Z" fill="currentColor" stroke="none" />
+              <path d="M0 52 Q20 44 40 52 T80 52 T120 52 T160 52 V64 H0Z" fill="currentColor" stroke="none" />
+            </svg>
+            <h4 className="font-display font-medium text-[20px] leading-snug relative">
+              {language === 'tr' ? 'Özel tur veya transfer mi lazım?' : 'Need a custom tour or transfer?'}
+            </h4>
+            <p className="text-[14px] text-white/75 mt-1.5 max-w-[32ch] relative">
+              {language === 'tr'
+                ? 'Size özel program ve fiyat teklifi hazırlayalım.'
+                : 'Get a personalized plan and a quote on WhatsApp.'}
+            </p>
+            <div className="flex flex-wrap items-center gap-2 mt-4 relative">
+              <button
+                onClick={() => { setActiveTab('request'); playSound('tab'); }}
+                className="h-11 px-5 rounded-full bg-orange-400 hover:bg-orange-300 text-[var(--ink)] text-[14px] font-semibold transition-colors"
+              >
+                {language === 'tr' ? 'Teklif iste' : 'Request a quote'}
+              </button>
+              <button
+                onClick={handleShareApp}
+                className="h-11 px-4 rounded-full text-white/90 hover:text-white text-[14px] font-medium flex items-center gap-2 ring-1 ring-white/20 hover:ring-white/40 transition-colors"
+              >
+                <Share2 className="w-4 h-4" />
+                <span>{language === 'tr' ? 'Rehberi paylaş' : 'Share the guide'}</span>
+              </button>
             </div>
-            <button
-              onClick={() => { setActiveTab('request'); playSound('tab'); }}
-              className="px-3.5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white text-xs font-black shrink-0 transition-colors"
-            >
-              {language === 'tr' ? 'Talep Et' : 'Request'}
-            </button>
-          </div>
+          </section>
         </>
       )}
 
@@ -730,7 +669,7 @@ export const HomeView: React.FC = () => {
 // Reusable card for place items
 const ItemCard: React.FC<{ item: PlaceItem; language: Language }> = ({ item, language }) => {
   return (
-    <div className="rounded-[26px] overflow-hidden bg-[var(--surface-card)] border border-[var(--border)] shadow-sm hover:border-teal-500/40 transition-all space-y-0 group">
+    <div className="rounded-[22px] overflow-hidden bg-[var(--surface-card)] border border-[var(--border)] shadow-[var(--lift)] group">
       {item.imageUrl && (
         <div className="relative h-44 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
           <img
@@ -758,22 +697,22 @@ const ItemCard: React.FC<{ item: PlaceItem; language: Language }> = ({ item, lan
 
       <div className="p-4 space-y-3">
         <div className="min-w-0">
-          <h4 className="font-black text-base text-[var(--text)]">
+          <h4 className="font-display font-medium text-[18px] leading-snug text-[var(--text)]">
             {language === 'tr' ? item.nameTr : item.nameEn}
           </h4>
         </div>
 
-        <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+        <p className="text-[14px] text-[var(--text-muted)] leading-relaxed">
           {language === 'tr' ? item.descTr : item.descEn}
         </p>
 
         {/* Price & Action Button */}
         <div className="pt-2 border-t border-[var(--border)] flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+            <div className="text-[12px] text-[var(--text-muted)]">
               {language === 'tr' ? 'Tahmini Fiyat / Bilgi' : 'Estimated Price / Info'}
             </div>
-            <div className="font-black text-xs text-orange-600 dark:text-orange-400 truncate">
+            <div className="font-semibold text-[14px] text-orange-600 dark:text-orange-300 truncate">
               {language === 'tr' ? item.priceTr : item.priceEn}
             </div>
           </div>
@@ -782,7 +721,7 @@ const ItemCard: React.FC<{ item: PlaceItem; language: Language }> = ({ item, lan
             href={item.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="h-10 px-3.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-teal-950/60 text-slate-800 dark:text-slate-200 hover:text-teal-700 dark:hover:text-teal-300 text-xs font-extrabold border border-slate-200 dark:border-slate-700 flex items-center gap-1.5 transition-all shrink-0 active:scale-95"
+            className="h-10 px-4 rounded-full bg-[var(--bg)] hover:bg-teal-50 dark:hover:bg-teal-950 text-[var(--text)] text-[13px] font-semibold border border-[var(--border)] flex items-center gap-1.5 transition-colors shrink-0"
           >
             <MapPin className="w-3.5 h-3.5 text-teal-600" />
             <span>{language === 'tr' ? 'Haritada Aç' : 'Open in Maps'}</span>

@@ -10,17 +10,17 @@ export const FloatingLanguageButton: React.FC = () => {
   const currentOption = SUPPORTED_LANGUAGES.find((l) => l.code === language) || SUPPORTED_LANGUAGES[0];
 
   return (
-    <div className="fixed right-4 bottom-[104px] z-40">
+    <div className="fixed right-3.5 bottom-[128px] z-40">
       <div className="relative">
         <button
           onClick={openLanguageModal}
-          className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-black text-xs shadow-lg hover:shadow-xl active:scale-95 transition-all border border-teal-400/30"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--surface-card)] text-[var(--text)] font-semibold text-xs shadow-lg active:scale-95 transition-all border border-[var(--border)]"
           title="Dili Değiştir / Select Language"
           aria-label="Change language"
         >
           <span className="text-lg leading-none">{currentOption.flag}</span>
-          <span className="uppercase tracking-wider font-extrabold">{currentOption.code}</span>
-          <Globe className="w-3.5 h-3.5 opacity-80" />
+          <span>{currentOption.nativeName}</span>
+          <Globe className="w-3.5 h-3.5 theme-text" />
         </button>
 
         {/* Real native selector for iPhone & mobile devices */}

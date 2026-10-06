@@ -10,10 +10,10 @@ export const FloatingThemeButton: React.FC = () => {
   if (activeTab !== 'home') return null;
 
   return (
-    <div className="fixed left-4 bottom-[104px] z-40 animate-in fade-in zoom-in duration-200">
+    <div className="fixed left-3.5 bottom-[88px] z-40 animate-in fade-in zoom-in duration-200">
       <button
         onClick={openThemeModal}
-        className="animate-signal flex items-center gap-1.5 px-3 py-2.5 rounded-full bg-[var(--surface-card)] hover:bg-slate-100 dark:hover:bg-slate-800 text-[var(--text)] font-black text-xs shadow-lg hover:shadow-xl active:scale-95 transition-all border border-[var(--border)] group"
+        className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[var(--surface-card)] text-[var(--text)] font-semibold text-xs shadow-lg active:scale-95 transition-all border border-[var(--border)] group"
         title={language === 'tr' ? 'Renk Teması Değiştir' : 'Change Color Theme'}
         aria-label="Change theme"
       >
